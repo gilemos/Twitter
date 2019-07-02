@@ -179,6 +179,11 @@
                         <viewLayoutGuide key="safeArea" id="ugE-Ul-H9I"/>
                     </view>
                     <navigationItem key="navigationItem" title="Home Timeline" id="MOc-fV-EZE">
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="XyO-xj-5zr">
+                            <connections>
+                                <action selector="logout:" destination="Lbl-k5-U4i" id="AcN-30-eMt"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Compose" id="FIW-uT-hLZ">
                             <connections>
                                 <segue destination="y4D-1w-iqc" kind="presentation" id="Aqs-K7-62d"/>
@@ -187,6 +192,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="TimelineTableView" destination="92O-U6-3kY" id="Obm-Qw-qVS"/>
+                        <outlet property="logoutButton" destination="XyO-xj-5zr" id="Bq5-MK-G34"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oQh-hN-GQg" userLabel="First Responder" sceneMemberID="firstResponder"/>
