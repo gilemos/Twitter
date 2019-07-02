@@ -11,11 +11,12 @@
 #import "Tweet.h"
 #import "TweetCell.h"
 #import "UIImageView+AFNetworking.h"
+#import "ComposeViewController.h"
 
-@interface TimelineViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface TimelineViewController () <ComposeViewControllerDelegate, UITableViewDataSource, UITableViewDelegate>
 
 //This property is an array containing all our tweets
-@property (strong, nonatomic) NSArray* arrayOfTweets;
+@property (strong, nonatomic) NSMutableArray* arrayOfTweets;
 
 //This is the table view for the timeline
 @property (weak, nonatomic) IBOutlet UITableView *TimelineTableView;
@@ -86,15 +87,20 @@
     [self reloadEverything];
     
 }
-/*
+
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    UINavigationController *navigationController = [segue destinationViewController];
+    ComposeViewController *composeController = (ComposeViewController*)navigationController.topViewController;
+    
+    composeController.delegate = self;
 }
-*/
+
 
 
 //This method creates a cell at the index path
@@ -137,5 +143,10 @@
     return self.arrayOfTweets.count;
 }
 
+
+-(void)didTweet:(Tweet *) tweet {
+    [self.arrayOfTweets addObject:tweet];
+    [self.TimelineTableView reloadData];
+}
 
 @end

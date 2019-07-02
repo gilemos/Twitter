@@ -22,12 +22,22 @@
     // Do any additional setup after loading the view.
 }
 - (IBAction)tweetButtom:(id)sender {
-    [self.apiManager init];
-    [self.apiManager postStatusWithText:self.tweetText.text completion:nil];
     
-    //If sucessfull, dismiss composer view controller
-    //TO DO: CALL IT ONLY WHEN IT IS SUCCESSFUL
-    [self dismissViewControllerAnimated:true completion:nil];
+    
+    //TO DO: SEE IF IT IS NECESSARY
+    //[self.apiManager init];
+    [[APIManager shared]postStatusWithText:self.tweetText.text completion:^(Tweet *tweet, NSError *error) {
+        if(error){
+            NSLog(@"Error composing Tweet: %@", error.localizedDescription);
+            
+            //If sucessfull, dismiss composer view controller
+            [self dismissViewControllerAnimated:true completion:nil];
+        }
+        else{
+            [self.delegate didTweet:tweet];
+            NSLog(@"Compose Tweet Success!");
+        }
+    }];
     
 }
 - (IBAction)closeButtom:(id)sender {
