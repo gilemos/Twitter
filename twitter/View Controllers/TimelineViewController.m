@@ -16,6 +16,7 @@
 
 @property (strong, nonatomic) NSArray* arrayOfTweets;
 @property (weak, nonatomic) IBOutlet UITableView *TimelineTableView;
+@property (strong, nonatomic) UIRefreshControl * refreshControl;
 
 @end
 
@@ -24,15 +25,22 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    //Adding the refresh
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl addTarget:self action:@selector(beginRefresh:) forControlEvents:UIControlEventValueChanged];
+    
     self.TimelineTableView.delegate = self;
     self.TimelineTableView.dataSource =self;
     
-    //Adding the refresh
-    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
-    [refreshControl addTarget:self action:@selector(beginRefresh:) forControlEvents:UIControlEventValueChanged];
     
-    [self.TimelineTableView insertSubview:refreshControl atIndex:0];
+    [self.TimelineTableView insertSubview:self.refreshControl atIndex:0];
     
+    [self reloadEverything];
+    
+}
+
+-(void)reloadEverything {
+
     // Get timeline
     [[APIManager shared] getHomeTimelineWithCompletion:^(NSArray *tweets, NSError *error) {
         if (tweets) {
@@ -44,13 +52,12 @@
             
             self.arrayOfTweets = tweets;
             
-            [refreshControl endRefreshing];
-            
             
         } else {
             NSLog(@"😫😫😫 Error getting home timeline: %@", error.localizedDescription);
         }
         
+        [self.refreshControl endRefreshing];
         [self.TimelineTableView reloadData];
     }];
 }
@@ -60,6 +67,10 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)beginRefresh:(UIRefreshControl *)refreshControl {
+    [self reloadEverything];
+    
+}
 /*
 #pragma mark - Navigation
 
