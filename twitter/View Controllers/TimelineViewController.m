@@ -107,32 +107,9 @@
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     
     TweetCell *cell = (TweetCell *) [tableView dequeueReusableCellWithIdentifier:@"tweetCell" forIndexPath:indexPath];
-    
-    
     Tweet *curTweet = self.arrayOfTweets[indexPath.row];
-    
-    User *curUser = curTweet.user;
-    
-    cell.screenNameLabel.text = curUser.screenName;
-    
-    cell.nameLabel.text = curUser.name;
-    
-    cell.dateLabel.text = curTweet.createdAtString;
-    
-    cell.tweetLabel.text = curTweet.text;
-    
-    cell.loveNumberLabel.text = [NSString stringWithFormat:@"%d",curTweet.favoriteCount];
-    
-    cell.retweetNumberLabel.text = [NSString stringWithFormat:@"%d", curTweet.retweetCount];
-    
-    //Getting the profile image
-    
-    NSString *photoLinkString = curUser.photoLink;
-    
-    NSURL *photoURL = [NSURL URLWithString:photoLinkString];
-    
-    [cell.profileImage setImageWithURL:photoURL];
-    
+    cell.tweet = curTweet;
+    [cell refreshData];
     return cell;
     
 }

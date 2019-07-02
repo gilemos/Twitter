@@ -40,6 +40,12 @@ NS_ASSUME_NONNULL_BEGIN
 //The tweet object containing the information about the tweet
 @property (strong, nonatomic) Tweet *tweet;
 
+@property (weak, nonatomic) IBOutlet UIButton *isFavourited;
+
+@property (weak, nonatomic) IBOutlet UIButton *isRetweeted;
+
+-(void) refreshData;
+
 @end
 
 NS_ASSUME_NONNULL_END
