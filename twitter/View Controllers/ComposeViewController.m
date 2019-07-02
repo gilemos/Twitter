@@ -6,8 +6,12 @@
 //
 
 #import "ComposeViewController.h"
+#import "APIManager.h"
+#import "Tweet.h"
 
 @interface ComposeViewController ()
+@property (weak, nonatomic) IBOutlet UITextView *tweetText;
+@property (strong, nonatomic) APIManager *apiManager;
 
 @end
 
@@ -18,6 +22,13 @@
     // Do any additional setup after loading the view.
 }
 - (IBAction)tweetButtom:(id)sender {
+    [self.apiManager init];
+    [self.apiManager postStatusWithText:self.tweetText.text completion:nil];
+    
+    //If sucessfull, dismiss composer view controller
+    //TO DO: CALL IT ONLY WHEN IT IS SUCCESSFUL
+    [self dismissViewControllerAnimated:true completion:nil];
+    
 }
 - (IBAction)closeButtom:(id)sender {
     [self dismissViewControllerAnimated:true completion:nil];

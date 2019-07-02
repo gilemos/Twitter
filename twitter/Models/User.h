@@ -18,7 +18,9 @@ NS_ASSUME_NONNULL_BEGIN
 //This is the name of the user that appears for his friends and followers
 @property (strong, nonatomic) NSString *screenName;
 
+//This is the link where the photo of the user is
 @property(strong, nonatomic) NSString *photoLink;
+
 //This method sets all our properties based on the dictionary that is returned from the API
 - (instancetype)initWithDictionary:(NSDictionary *) dictionary;
 

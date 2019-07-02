@@ -161,7 +161,7 @@
                     <navigationItem key="navigationItem" title="Home Timeline" id="MOc-fV-EZE">
                         <barButtonItem key="rightBarButtonItem" title="Compose" id="FIW-uT-hLZ">
                             <connections>
-                                <segue destination="y4D-1w-iqc" kind="presentation" id="xYF-Ph-r70"/>
+                                <segue destination="y4D-1w-iqc" kind="presentation" id="Aqs-K7-62d"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -223,6 +223,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="tweetText" destination="Xuv-Ns-yXW" id="wOO-rq-Pbm"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FLA-we-0fj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
