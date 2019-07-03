@@ -17,6 +17,8 @@
 		6AD278F620BCB68B0085BC29 /* APIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AD278F520BCB68B0085BC29 /* APIManager.m */; };
 		6AD2790620BCC0380085BC29 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AD2790520BCC0380085BC29 /* LoginViewController.m */; };
 		6AD2790920BCC04D0085BC29 /* TimelineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AD2790820BCC04D0085BC29 /* TimelineViewController.m */; };
+		710CD30822CD28C400CD7B0C /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 710CD30722CD28C400CD7B0C /* ProfileViewController.m */; };
+		710CD30E22CD2A7900CD7B0C /* ProfileCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 710CD30D22CD2A7900CD7B0C /* ProfileCell.m */; };
 		71A18E4122CC2F1500C5E889 /* TweetDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71A18E4022CC2F1500C5E889 /* TweetDetailsViewController.m */; };
 		71F863A622CA6BA800598A58 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 71F863A522CA6BA800598A58 /* User.m */; };
 		71F863A922CA6F1A00598A58 /* Tweet.m in Sources */ = {isa = PBXBuildFile; fileRef = 71F863A822CA6F1A00598A58 /* Tweet.m */; };
@@ -43,6 +45,10 @@
 		6AD2790520BCC0380085BC29 /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		6AD2790720BCC04D0085BC29 /* TimelineViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TimelineViewController.h; sourceTree = "<group>"; };
 		6AD2790820BCC04D0085BC29 /* TimelineViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TimelineViewController.m; sourceTree = "<group>"; };
+		710CD30622CD28C400CD7B0C /* ProfileViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
+		710CD30722CD28C400CD7B0C /* ProfileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
+		710CD30C22CD2A7900CD7B0C /* ProfileCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProfileCell.h; sourceTree = "<group>"; };
+		710CD30D22CD2A7900CD7B0C /* ProfileCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProfileCell.m; sourceTree = "<group>"; };
 		71A18E3F22CC2F1500C5E889 /* TweetDetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TweetDetailsViewController.h; sourceTree = "<group>"; };
 		71A18E4022CC2F1500C5E889 /* TweetDetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TweetDetailsViewController.m; sourceTree = "<group>"; };
 		71F863A422CA6BA800598A58 /* User.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
@@ -139,6 +145,8 @@
 			children = (
 				71F863AA22CABDE500598A58 /* TweetCell.h */,
 				71F863AB22CABDE500598A58 /* TweetCell.m */,
+				710CD30C22CD2A7900CD7B0C /* ProfileCell.h */,
+				710CD30D22CD2A7900CD7B0C /* ProfileCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -154,6 +162,8 @@
 				71F863B022CAE14F00598A58 /* ComposeViewController.m */,
 				71A18E3F22CC2F1500C5E889 /* TweetDetailsViewController.h */,
 				71A18E4022CC2F1500C5E889 /* TweetDetailsViewController.m */,
+				710CD30622CD28C400CD7B0C /* ProfileViewController.h */,
+				710CD30722CD28C400CD7B0C /* ProfileViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -286,7 +296,9 @@
 				71F863A922CA6F1A00598A58 /* Tweet.m in Sources */,
 				6AD2790620BCC0380085BC29 /* LoginViewController.m in Sources */,
 				6AD278DA20BC4B950085BC29 /* AppDelegate.m in Sources */,
+				710CD30E22CD2A7900CD7B0C /* ProfileCell.m in Sources */,
 				6AD278F620BCB68B0085BC29 /* APIManager.m in Sources */,
+				710CD30822CD28C400CD7B0C /* ProfileViewController.m in Sources */,
 				6AD2790920BCC04D0085BC29 /* TimelineViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

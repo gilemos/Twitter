@@ -9,6 +9,7 @@
 #import "APIManager.h"
 #import "Tweet.h"
 #import "ComposeViewController.h"
+#import "User.h"
 
 static NSString * const baseURLString = @"https://api.twitter.com";
 static NSString * const consumerKey = @"5lUJuO5AUpPUCez4ewYDFrtgh";
@@ -48,7 +49,7 @@ static NSString * const consumerSecret = @"s5ynGqXzstUZwFPxVyMDkYh197qvHOcVM3kwv
     return self;
 }
 
-#pragma mark - Updating tweets
+#pragma mark - General Requests
 //Updating the timeline
 - (void)getHomeTimelineWithCompletion:(void(^)(NSArray *tweets, NSError *error))completion {
     [self GET:@"1.1/statuses/home_timeline.json"
@@ -61,6 +62,34 @@ static NSString * const consumerSecret = @"s5ynGqXzstUZwFPxVyMDkYh197qvHOcVM3kwv
        completion(nil, error);
    }];
 }
+
+- (void)getUserWithCompletion:(void(^)(NSDictionary *userDictionary, NSError *error))completion {
+    [self GET:@"https://api.twitter.com/1.1/users/show.json?screen_name=Giovann45586421"
+   parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *  _Nullable rootDictionary) {
+       // Manually cache the tweets. If the request fails, restore from cache if possible.
+       NSDictionary *userDictionary = rootDictionary;
+       completion(userDictionary, nil);
+   } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+       // There was a problem
+       completion(nil, error);
+   }];
+}
+
+/*
+// ------ TODO: USER STUFF
+
+//Getting user credentials
+- (void)getUserCredentialsWithCompletion:(void(^)(User *obtainedUser, NSError *error))completion {
+    [self GET:@"https://api.twitter.com/1.1/account/verify_credentials.json"
+   parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSArray *  _Nullable userDictionaryFull) {
+       User *obtainedUser  = [User UserWithArray:userDictionaryFull];
+       completion(obtainedUser, nil);
+   } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+       // There was a problem
+       completion(nil, error);
+   }];
+}
+*/
 
 //Method to post the tweet
 - (void)postStatusWithText:(NSString *)text completion:(void (^)(Tweet *, NSError *))completion{

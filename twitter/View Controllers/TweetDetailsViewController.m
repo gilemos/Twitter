@@ -18,8 +18,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    
     //Setting the delegate and the datasource
     self.TweetDetailsTableView.delegate = self;
     self.TweetDetailsTableView.dataSource = self;

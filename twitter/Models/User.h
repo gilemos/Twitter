@@ -15,9 +15,17 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) NSString *name;
 @property (strong, nonatomic) NSString *screenName;
 @property(strong, nonatomic) NSString *photoLink;
+@property(strong, nonatomic) NSString *coverLink;
+@property(strong, nonatomic) NSString *userDescription;
+@property(nonatomic) NSInteger followesCount;
+@property(nonatomic) NSInteger followingCount;
+@property(nonatomic) NSInteger tweetsCount;
 
 //This method sets all our properties based on the dictionary that is returned from the API
 - (instancetype)initWithDictionary:(NSDictionary *) dictionary;
+
+//TO DO: USER STUFF
+//+ (User *)UserWithArray:(NSArray *)dictionaries;
 
 @end
 
