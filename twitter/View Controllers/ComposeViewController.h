@@ -9,7 +9,7 @@
 #import "Tweet.h"
 
 NS_ASSUME_NONNULL_BEGIN
-//Protocol section - Define a protocol to connect with other classes
+
 @protocol ComposeViewControllerDelegate
 @required
 -(void)didTweet:(Tweet *) tweet;

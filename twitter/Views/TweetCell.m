@@ -14,25 +14,20 @@
 
 @implementation TweetCell
 
+#pragma mark - Flow of the app
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-    
-    // Configure the view for the selected state
-}
-
+#pragma mark - Button functions
+//Function for tapping the like buttom
 - (IBAction)didTapLike:(id)sender {
-    
-    
+    //If it not favorited yet
     if(self.tweet.favorited == NO) {
         self.tweet.favorited = YES;
         self.tweet.favoriteCount += 1;
         self.isFavourited.selected = YES;
-        
         [[APIManager shared] favorite:self.tweet completion:^(Tweet *tweet, NSError *error) {
             if(error){
                 NSLog(@"Error favoriting tweet: %@", error.localizedDescription);
@@ -42,11 +37,11 @@
             }
         }];
     }
+    //If it is favourited
     else {
         self.tweet.favorited = NO;
         self.tweet.favoriteCount -= 1;
         self.isFavourited.selected = NO;
-        
         [[APIManager shared] unFavorite:self.tweet completion:^(Tweet *tweet, NSError *error) {
             if(error){
                 NSLog(@"Error unfavoriting tweet: %@", error.localizedDescription);
@@ -56,17 +51,16 @@
             }
         }];
     }
-    
     [self refreshData];
 }
 
+//Function for retweeting
 - (IBAction)tapRetweet:(id)sender {
-    
+    //If it is not retweeted yet
     if(self.tweet.retweeted == NO) {
         self.tweet.retweeted = YES;
         self.tweet.retweetCount += 1;
         self.isRetweeted.selected = YES;
-        
         [[APIManager shared] retweet:self.tweet completion:^(Tweet *tweet, NSError *error) {
             if(error){
                 NSLog(@"Error favoriting tweet: %@", error.localizedDescription);
@@ -76,6 +70,7 @@
             }
         }];
     }
+    //If it is retweeted
     else {
         self.tweet.retweeted = NO;
         self.tweet.retweetCount -= 1;
@@ -94,32 +89,25 @@
     [self refreshData];
 }
 
+#pragma mark - helper methods
+//Refreshing the data of the tweet
 -(void) refreshData {
-    
     User *user = self.tweet.user;
-    
     self.screenNameLabel.text = user.screenName;
-    
     self.nameLabel.text = user.name;
-    
     self.dateLabel.text = self.tweet.createdAtString;
-    
     self.tweetLabel.text = self.tweet.text;
-    
     self.loveNumberLabel.text = [NSString stringWithFormat:@"%d",self.tweet.favoriteCount];
-    
     self.retweetNumberLabel.text = [NSString stringWithFormat:@"%d", self.tweet.retweetCount];
     
-    
     //Getting the profile image
-    
     NSString *photoLinkString = user.photoLink;
-    
     NSURL *photoURL = [NSURL URLWithString:photoLinkString];
-    
     [self.profileImage setImageWithURL:photoURL];
-    
-    
 }
 
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
+    [super setSelected:selected animated:animated];
+    // Configure the view for the selected state
+}
 @end

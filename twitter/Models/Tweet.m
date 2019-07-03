@@ -10,22 +10,13 @@
 
 @implementation Tweet
 
+#pragma mark - Initialization methods
 // This method initializes the properties based on the dictionary returned from the API
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary {
     self = [super init];
     if (self) {
-
-        // Is this a re-tweet?
-        NSDictionary *originalTweet = dictionary[@"retweeted_status"];
+        [self retweetCheckWithDictionary:dictionary];
         
-        //If it is a retweet, then set the property retweeted by user
-        if(originalTweet != nil){
-            NSDictionary *userDictionary = dictionary[@"user"];
-            self.retweetedByUser = [[User alloc] initWithDictionary:userDictionary];
-            
-            // Change tweet to original tweet
-            dictionary = originalTweet;
-        }
         self.idString = dictionary[@"id_str"];
         self.text = dictionary[@"text"];
         self.favoriteCount = [dictionary[@"favorite_count"] intValue];
@@ -38,18 +29,7 @@
         self.user = [[User alloc] initWithDictionary:user];
         
         //Formatting and setting createdAtString
-           //The original string is in the format “Wed Aug 27 13:08:45 +0000 2008”
-        NSString *createdAtOriginalString = dictionary[@"created_at"];
-        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-           // Configuring the input format to parse the date string
-        formatter.dateFormat = @"E MMM d HH:mm:ss Z y";
-          // Converting String to Date format
-        NSDate *date = [formatter dateFromString:createdAtOriginalString];
-          // Configuring output format
-        formatter.dateStyle = NSDateFormatterShortStyle;
-        formatter.timeStyle = NSDateFormatterNoStyle;
-          // Convertign Date back to String format
-        self.createdAtString = [formatter stringFromDate:date];
+        [self CreatedAtStringFormattingWithDictionary:dictionary];
     }
     return self;
 }
@@ -62,6 +42,34 @@
         [tweets addObject:tweet];
     }
     return tweets;
+}
+
+#pragma mark - Helper Methods
+-(void)retweetCheckWithDictionary:(NSDictionary *)dictionary {
+    // Is this a re-tweet?
+    NSDictionary *originalTweet = dictionary[@"retweeted_status"];
+    //If it is a retweet, then set the property retweeted by user
+    if(originalTweet != nil){
+        NSDictionary *userDictionary = dictionary[@"user"];
+        self.retweetedByUser = [[User alloc] initWithDictionary:userDictionary];
+        // Change tweet to original tweet
+        dictionary = originalTweet;
+    }
+}
+
+-(void)CreatedAtStringFormattingWithDictionary:(NSDictionary *)dictionary {
+    //The original string is in the format “Wed Aug 27 13:08:45 +0000 2008”
+    NSString *createdAtOriginalString = dictionary[@"created_at"];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    // Configuring the input format to parse the date string
+    formatter.dateFormat = @"E MMM d HH:mm:ss Z y";
+    // Converting String to Date format
+    NSDate *date = [formatter dateFromString:createdAtOriginalString];
+    // Configuring output format
+    formatter.dateStyle = NSDateFormatterShortStyle;
+    formatter.timeStyle = NSDateFormatterNoStyle;
+    // Convertign Date back to String format
+    self.createdAtString = [formatter stringFromDate:date];
 }
 
 @end
