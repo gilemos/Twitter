@@ -14,6 +14,7 @@
 #import "ComposeViewController.h"
 #import "AppDelegate.h"
 #import "LoginViewController.h"
+#import "TweetDetailsViewController.h"
 
 @interface TimelineViewController () <ComposeViewControllerDelegate, UITableViewDataSource, UITableViewDelegate>
 
@@ -40,16 +41,6 @@
     //Reloading all the data
     [self reloadEverything];
 }
-
-//This method defines what to do when you click in the logout buttom. It leaves the view controller and goes back to the log in screen
-- (IBAction)logout:(id)sender {
-    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    LoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
-    appDelegate.window.rootViewController = loginViewController;
-    [[APIManager shared] logout];
-}
-
 
 #pragma mark - table view protocols
 //This method creates a cell at the index path
@@ -117,12 +108,38 @@
 }
 
 #pragma mark - Navigation
-// In a storyboard-based application, you will often want to do a little preparation before navigation
+//This method defines what to do when you click in the logout buttom. It leaves the view controller and goes back to the log in screen
+- (IBAction)logout:(id)sender {
+    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    LoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
+    appDelegate.window.rootViewController = loginViewController;
+    [[APIManager shared] logout];
+}
+
+// Prepares to go to the next screen
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    //----- Going to the composer
+    if([[segue identifier] isEqualToString:@"segueToCompose"]) {
+    [self ComposerSegue:segue];
+    }
+    else if([[segue  identifier] isEqualToString:@"segueToTweetDetails"]) {
+    //-----Going to tweetDetails
+    [self TweetDetailsSegue:segue sender:sender];
+    }
+}
+
+#pragma mark - Helper methods for navigation
+-(void)ComposerSegue:(UIStoryboardSegue *)segue{
     UINavigationController *navigationController = [segue destinationViewController];
     ComposeViewController *composeController = (ComposeViewController*)navigationController.topViewController;
     composeController.delegate = self;
+}
+
+-(void)TweetDetailsSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    TweetCell *tappedCell = sender;
+    Tweet *curTweet = tappedCell.tweet;
+    TweetDetailsViewController *tweetdetailsViewController = [segue destinationViewController];
+    [tweetdetailsViewController setTweet:curTweet];
 }
 @end

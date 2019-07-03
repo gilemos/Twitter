@@ -94,8 +94,8 @@
 //Refreshing the data of the tweet
 -(void) refreshData {
     User *user = self.tweet.user;
-    self.screenNameLabel.text = user.screenName;
-    self.nameLabel.text = user.name;
+    self.screenNameLabel.text = user.name;
+    self.nameLabel.text = [NSString stringWithFormat:@"@%@", user.screenName];
     self.dateLabel.text = self.tweet.createdAtString;
     self.tweetLabel.text = self.tweet.text;
     self.loveNumberLabel.text = [NSString stringWithFormat:@"%d",self.tweet.favoriteCount];
@@ -113,9 +113,4 @@
     // Configure the view for the selected state
 }
 
--(void) setTimeAgo {
-    NSDate *today = [NSDate date];
-    
-    
-}
 @end

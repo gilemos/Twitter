@@ -7,8 +7,10 @@
 //
 
 #import "TweetDetailsViewController.h"
+#import "TweetCell.h"
 
-@interface TweetDetailsViewController ()
+@interface TweetDetailsViewController () <UITableViewDataSource, UITableViewDelegate>
+@property (weak, nonatomic) IBOutlet UITableView *TweetDetailsTableView;
 
 @end
 
@@ -17,8 +19,25 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    //Setting the delegate and the datasource
+    self.TweetDetailsTableView.delegate = self;
+    self.TweetDetailsTableView.dataSource = self;
 }
 
+#pragma mark - table view protocols
+//This method creates a cell at the index path
+- (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
+    TweetCell *cell = (TweetCell *) [tableView dequeueReusableCellWithIdentifier:@"tweetCell" forIndexPath:indexPath];
+    cell.tweet = self.tweet;
+    [cell refreshData];
+    return cell;
+}
+
+//This method tells how many cells there are
+- (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 1;
+}
 /*
 #pragma mark - Navigation
 
