@@ -11,7 +11,6 @@
 
 @interface ComposeViewController ()
 @property (weak, nonatomic) IBOutlet UITextView *tweetText;
-@property (strong, nonatomic) APIManager *apiManager;
 
 @end
 

@@ -28,9 +28,6 @@ NS_ASSUME_NONNULL_BEGIN
 //The label containig the tweet itself
 @property (weak, nonatomic) IBOutlet UILabel *tweetLabel;
 
-//The number of replies the tweet got
-@property (weak, nonatomic) IBOutlet UILabel *replyNumberLabel;
-
 //The number of retweets the tweet got
 @property (weak, nonatomic) IBOutlet UILabel *retweetNumberLabel;
 
