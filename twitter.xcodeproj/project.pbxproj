@@ -17,6 +17,10 @@
 		6AD278F620BCB68B0085BC29 /* APIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AD278F520BCB68B0085BC29 /* APIManager.m */; };
 		6AD2790620BCC0380085BC29 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AD2790520BCC0380085BC29 /* LoginViewController.m */; };
 		6AD2790920BCC04D0085BC29 /* TimelineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AD2790820BCC04D0085BC29 /* TimelineViewController.m */; };
+		71A18E4122CC2F1500C5E889 /* TweetDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71A18E4022CC2F1500C5E889 /* TweetDetailsViewController.m */; };
+		71A18E4422CC2FF400C5E889 /* DetailsTweetCellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 71A18E4322CC2FF400C5E889 /* DetailsTweetCellTableViewCell.m */; };
+		71A18E4722CC301600C5E889 /* InsertCommentTweetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 71A18E4622CC301600C5E889 /* InsertCommentTweetCell.m */; };
+		71A18E4A22CC302800C5E889 /* CommentsTweetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 71A18E4922CC302800C5E889 /* CommentsTweetCell.m */; };
 		71F863A622CA6BA800598A58 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 71F863A522CA6BA800598A58 /* User.m */; };
 		71F863A922CA6F1A00598A58 /* Tweet.m in Sources */ = {isa = PBXBuildFile; fileRef = 71F863A822CA6F1A00598A58 /* Tweet.m */; };
 		71F863AC22CABDE500598A58 /* TweetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 71F863AB22CABDE500598A58 /* TweetCell.m */; };
@@ -42,6 +46,14 @@
 		6AD2790520BCC0380085BC29 /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		6AD2790720BCC04D0085BC29 /* TimelineViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TimelineViewController.h; sourceTree = "<group>"; };
 		6AD2790820BCC04D0085BC29 /* TimelineViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TimelineViewController.m; sourceTree = "<group>"; };
+		71A18E3F22CC2F1500C5E889 /* TweetDetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TweetDetailsViewController.h; sourceTree = "<group>"; };
+		71A18E4022CC2F1500C5E889 /* TweetDetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TweetDetailsViewController.m; sourceTree = "<group>"; };
+		71A18E4222CC2FF400C5E889 /* DetailsTweetCellTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailsTweetCellTableViewCell.h; sourceTree = "<group>"; };
+		71A18E4322CC2FF400C5E889 /* DetailsTweetCellTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailsTweetCellTableViewCell.m; sourceTree = "<group>"; };
+		71A18E4522CC301600C5E889 /* InsertCommentTweetCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InsertCommentTweetCell.h; sourceTree = "<group>"; };
+		71A18E4622CC301600C5E889 /* InsertCommentTweetCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InsertCommentTweetCell.m; sourceTree = "<group>"; };
+		71A18E4822CC302800C5E889 /* CommentsTweetCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommentsTweetCell.h; sourceTree = "<group>"; };
+		71A18E4922CC302800C5E889 /* CommentsTweetCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommentsTweetCell.m; sourceTree = "<group>"; };
 		71F863A422CA6BA800598A58 /* User.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		71F863A522CA6BA800598A58 /* User.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		71F863A722CA6F1A00598A58 /* Tweet.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Tweet.h; sourceTree = "<group>"; };
@@ -136,6 +148,12 @@
 			children = (
 				71F863AA22CABDE500598A58 /* TweetCell.h */,
 				71F863AB22CABDE500598A58 /* TweetCell.m */,
+				71A18E4222CC2FF400C5E889 /* DetailsTweetCellTableViewCell.h */,
+				71A18E4322CC2FF400C5E889 /* DetailsTweetCellTableViewCell.m */,
+				71A18E4522CC301600C5E889 /* InsertCommentTweetCell.h */,
+				71A18E4622CC301600C5E889 /* InsertCommentTweetCell.m */,
+				71A18E4822CC302800C5E889 /* CommentsTweetCell.h */,
+				71A18E4922CC302800C5E889 /* CommentsTweetCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -149,6 +167,8 @@
 				6AD2790820BCC04D0085BC29 /* TimelineViewController.m */,
 				71F863B122CAE14F00598A58 /* ComposeViewController.h */,
 				71F863B022CAE14F00598A58 /* ComposeViewController.m */,
+				71A18E3F22CC2F1500C5E889 /* TweetDetailsViewController.h */,
+				71A18E4022CC2F1500C5E889 /* TweetDetailsViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -257,7 +277,11 @@
 				71F863AC22CABDE500598A58 /* TweetCell.m in Sources */,
 				6AD278F320BCA6020085BC29 /* BDBOAuth1SessionManager+SFAuthenticationSession.m in Sources */,
 				71F863A622CA6BA800598A58 /* User.m in Sources */,
+				71A18E4722CC301600C5E889 /* InsertCommentTweetCell.m in Sources */,
+				71A18E4122CC2F1500C5E889 /* TweetDetailsViewController.m in Sources */,
+				71A18E4422CC2FF400C5E889 /* DetailsTweetCellTableViewCell.m in Sources */,
 				71F863B222CAE14F00598A58 /* ComposeViewController.m in Sources */,
+				71A18E4A22CC302800C5E889 /* CommentsTweetCell.m in Sources */,
 				6AD278E820BC4B970085BC29 /* main.m in Sources */,
 				71F863A922CA6F1A00598A58 /* Tweet.m in Sources */,
 				6AD2790620BCC0380085BC29 /* LoginViewController.m in Sources */,
