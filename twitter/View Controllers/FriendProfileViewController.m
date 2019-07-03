@@ -25,6 +25,7 @@
 //This method creates a cell at the index path
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     ProfileCell *cell = (ProfileCell*) [tableView dequeueReusableCellWithIdentifier:@"profilecell" forIndexPath:indexPath];
+    cell.user = self.user;
     [cell refreshData];
     return cell;
 }
