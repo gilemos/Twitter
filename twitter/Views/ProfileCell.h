@@ -21,6 +21,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *numFollowers;
 @property (weak, nonatomic) IBOutlet UILabel *userDescription;
 @property (strong, nonatomic) User* user;
+
+-(void)refreshData;
+
 @end
 
 NS_ASSUME_NONNULL_END

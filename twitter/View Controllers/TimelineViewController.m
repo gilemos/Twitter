@@ -15,6 +15,7 @@
 #import "AppDelegate.h"
 #import "LoginViewController.h"
 #import "TweetDetailsViewController.h"
+#import "FriendProfileViewController.h"
 
 @interface TimelineViewController () <ComposeViewControllerDelegate, UITableViewDataSource, UITableViewDelegate>
 
@@ -142,4 +143,5 @@
     TweetDetailsViewController *tweetdetailsViewController = [segue destinationViewController];
     [tweetdetailsViewController setTweet:curTweet];
 }
+
 @end

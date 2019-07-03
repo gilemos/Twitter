@@ -37,7 +37,7 @@
     ProfileCell *cell = (ProfileCell*) [tableView dequeueReusableCellWithIdentifier:@"profilecell" forIndexPath:indexPath];
     [self callForUser];
     cell.user = self.user;
-    [self refreshDataFromCell:cell];
+    [cell refreshData];
     return cell;
 }
 
@@ -60,24 +60,6 @@
     }];
 }
 
--(void)refreshDataFromCell:(ProfileCell*)cell{
-    cell.screenName.text = self.user.screenName;
-    cell.Name.text = self.user.name;
-    cell.numTweets.text = [NSString stringWithFormat:@"%li", (long)self.user.tweetsCount];
-    cell.numFollowing.text = [NSString stringWithFormat:@"%li", (long)self.user.followingCount];
-    cell.numFollowers.text = [NSString stringWithFormat:@"%li", (long)self.user.followesCount];
-    cell.userDescription.text = self.user.userDescription;
-    
-    //Getting the profile and cover image
-    NSString *photoLinkString = self.user.photoLink;
-    NSString *coverLinkString = self.user.coverLink;
-    
-    NSURL *photoURL = [NSURL URLWithString:photoLinkString];
-    NSURL *coverURL = [NSURL URLWithString:coverLinkString];
-    
-    [cell.profileImage setImageWithURL:photoURL];
-    [cell.coverImage setImageWithURL:coverURL];
-}
 /*
 #pragma mark - Navigation
 

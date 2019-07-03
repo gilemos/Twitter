@@ -18,7 +18,7 @@
 #pragma mark - Flow of the app
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
+    self.profileTapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(didTapPicture:)];
 }
 
 #pragma mark - Button functions
@@ -90,6 +90,11 @@
     [self refreshData];
 }
 
+- (IBAction)didTapPicture:(id)sender {
+    [self.delegate tweetCell:self didTap:self.tweet.user];
+}
+
+
 #pragma mark - helper methods
 //Refreshing the data of the tweet
 -(void) refreshData {
@@ -106,6 +111,11 @@
     NSString *photoLinkString = user.photoLink;
     NSURL *photoURL = [NSURL URLWithString:photoLinkString];
     [self.profileImage setImageWithURL:photoURL];
+    
+    //Putting action in picture
+    [self.profileImage addGestureRecognizer:self.profileTapGestureRecognizer];
+    [self.profileImage setUserInteractionEnabled:YES];
+
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
