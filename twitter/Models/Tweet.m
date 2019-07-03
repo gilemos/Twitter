@@ -28,8 +28,8 @@
         NSDictionary *user = dictionary[@"user"];
         self.user = [[User alloc] initWithDictionary:user];
         
-        //Formatting and setting createdAtString
-        [self CreatedAtStringFormattingWithDictionary:dictionary];
+        //Formatting and setting createdAtString and tweetDate
+        [self DateFormattingWithDictionary:dictionary];
     }
     return self;
 }
@@ -57,7 +57,7 @@
     }
 }
 
--(void)CreatedAtStringFormattingWithDictionary:(NSDictionary *)dictionary {
+-(void)DateFormattingWithDictionary:(NSDictionary *)dictionary {
     //The original string is in the format “Wed Aug 27 13:08:45 +0000 2008”
     NSString *createdAtOriginalString = dictionary[@"created_at"];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
@@ -68,8 +68,10 @@
     // Configuring output format
     formatter.dateStyle = NSDateFormatterShortStyle;
     formatter.timeStyle = NSDateFormatterNoStyle;
-    // Convertign Date back to String format
     self.createdAtString = [formatter stringFromDate:date];
+    self.tweetDate = date;
+    
 }
+
 
 @end

@@ -22,6 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic) BOOL retweeted;
 @property(strong, nonatomic) User *user;
 @property(strong, nonatomic) NSString *createdAtString;
+@property(strong, nonatomic) NSDate *tweetDate;
 
 // ----- FOR RETWEETS -----
 @property (strong, nonatomic) User *retweetedByUser;

@@ -11,6 +11,7 @@
 #import "Tweet.h"
 #import "UIImageView+AFNetworking.h"
 #import "APIManager.h"
+#import "DateTools.h"
 
 @implementation TweetCell
 
@@ -99,6 +100,7 @@
     self.tweetLabel.text = self.tweet.text;
     self.loveNumberLabel.text = [NSString stringWithFormat:@"%d",self.tweet.favoriteCount];
     self.retweetNumberLabel.text = [NSString stringWithFormat:@"%d", self.tweet.retweetCount];
+    self.timeAgoLabel.text = self.tweet.tweetDate.shortTimeAgoSinceNow;
     
     //Getting the profile image
     NSString *photoLinkString = user.photoLink;
@@ -109,5 +111,11 @@
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
     // Configure the view for the selected state
+}
+
+-(void) setTimeAgo {
+    NSDate *today = [NSDate date];
+    
+    
 }
 @end
