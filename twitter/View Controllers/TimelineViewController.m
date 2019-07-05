@@ -16,6 +16,7 @@
 #import "LoginViewController.h"
 #import "TweetDetailsViewController.h"
 #import "FriendProfileViewController.h"
+#import "InfiniteScrollActivityView.h"
 
 @interface TimelineViewController () <ComposeViewControllerDelegate, UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 
@@ -23,18 +24,22 @@
 @property (weak, nonatomic) IBOutlet UITableView *TimelineTableView;
 @property (strong, nonatomic) UIRefreshControl * refreshControl;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *logoutButton;
-//@property (assign, nonatomic) BOOL isMoreDataLoading;
-
+@property (assign, nonatomic) BOOL isMoreDataLoading;
+//@property (weak, nonatomic) InfiniteScrollActivityView* loadingMoreView;
 @end
 
 @implementation TimelineViewController
+//bool isMoreDataLoading = false;
+InfiniteScrollActivityView* loadingMoreView;
 
 #pragma mark - Flow of the app
 //Method that is called as soon as the screen first lauches. It sets who is the delegate and the data source, sets the refresh control and calls the method to load all out tweet data.
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.isMoreDataLoading = NO;
     //Adding the refresh
     [self setRefreshControl];
+    [self setInfiniteScroll];
     
     //Setting the delegate and the datasource
     self.TimelineTableView.delegate = self;
@@ -59,7 +64,7 @@
     return self.arrayOfTweets.count;
 }
 
-/*
+
 #pragma mark - scroll protocol
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
@@ -69,14 +74,18 @@
     
     // When the user has scrolled past the threshold, start requesting
     if(scrollView.contentOffset.y > scrollOffsetThreshold && self.TimelineTableView.isDragging) {
-        self.isMoreDataLoading = true;
-        [self reloadEverything];
+        self.isMoreDataLoading = YES;
         
-        // ... Code to load more results ...
+        // Update position of loadingMoreView, and start loading indicator
+        CGRect frame = CGRectMake(0, self.TimelineTableView.contentSize.height, self.TimelineTableView.bounds.size.width, InfiniteScrollActivityView.defaultHeight);
+        loadingMoreView.frame = frame;
+        [loadingMoreView startAnimating];
+        
+        //load more results
+        [self loadMoreData];
     }
 
 }
-*/
 
 #pragma mark - Helper Methods
 //This method is responsible for stablishing network connection and loading/reloading all our tweet data
@@ -106,11 +115,36 @@
     }];
 }
 
+-(void)loadMoreData{
+    NSNumber *nextTweetId = [self getNextTweetId];
+    [[APIManager shared] getMoreTweetsWithParameter:@{@"max_id":nextTweetId} withCompletion:^(NSArray *tweets, NSError *error) {
+        if (tweets) {
+            NSLog(@"😎😎😎 Successfully loaded more tweets");
+            self.arrayOfTweets = (NSMutableArray*) tweets;
+            self.isMoreDataLoading = NO;
+            [loadingMoreView stopAnimating];
+        } else {
+            NSLog(@"😫😫😫 Error loading more tweets: %@", error.localizedDescription);
+        }
+        [self.TimelineTableView reloadData];
+    }];
+}
 
 -(void)setRefreshControl{
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(beginRefresh:) forControlEvents:UIControlEventValueChanged];
     [self.TimelineTableView insertSubview:self.refreshControl atIndex:0]; //inserting the refresh at the top
+}
+
+-(void)setInfiniteScroll {
+    CGRect frame = CGRectMake(0, self.TimelineTableView.contentSize.height, self.TimelineTableView.bounds.size.width, InfiniteScrollActivityView.defaultHeight);
+    loadingMoreView = [[InfiniteScrollActivityView alloc] initWithFrame:frame];
+    loadingMoreView.hidden = true;
+    [self.TimelineTableView addSubview:loadingMoreView];
+    
+    UIEdgeInsets insets = self.TimelineTableView.contentInset;
+    insets.bottom += InfiniteScrollActivityView.defaultHeight;
+    self.TimelineTableView.contentInset = insets;
 }
 
 //This is a method for the refresh control. It is only called by the rerfesh control and its only function is to call the method reload everything so we can reload our tweet data and get more tweets for the timeline
@@ -129,6 +163,13 @@
     [self.TimelineTableView reloadData];
 }
 
+-(NSNumber *)getNextTweetId {
+    Tweet * lastTweet = self.arrayOfTweets[self.arrayOfTweets.count - 1];
+    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+    NSNumber *idNumber = [formatter numberFromString:lastTweet.idString];
+    NSNumber *idLongLong= @(idNumber.longLongValue - 1);
+    return idLongLong;
+}
 
 #pragma mark - Navigation
 //This method defines what to do when you click in the logout buttom. It leaves the view controller and goes back to the log in screen

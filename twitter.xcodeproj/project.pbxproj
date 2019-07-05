@@ -20,6 +20,7 @@
 		710CD30822CD28C400CD7B0C /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 710CD30722CD28C400CD7B0C /* ProfileViewController.m */; };
 		710CD30E22CD2A7900CD7B0C /* ProfileCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 710CD30D22CD2A7900CD7B0C /* ProfileCell.m */; };
 		710CD31122CD654D00CD7B0C /* FriendProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 710CD31022CD654D00CD7B0C /* FriendProfileViewController.m */; };
+		710CD31422CFD66F00CD7B0C /* InfiniteScrollActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 710CD31322CFD66F00CD7B0C /* InfiniteScrollActivityView.m */; };
 		71A18E4122CC2F1500C5E889 /* TweetDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71A18E4022CC2F1500C5E889 /* TweetDetailsViewController.m */; };
 		71F863A622CA6BA800598A58 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 71F863A522CA6BA800598A58 /* User.m */; };
 		71F863A922CA6F1A00598A58 /* Tweet.m in Sources */ = {isa = PBXBuildFile; fileRef = 71F863A822CA6F1A00598A58 /* Tweet.m */; };
@@ -52,6 +53,8 @@
 		710CD30D22CD2A7900CD7B0C /* ProfileCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProfileCell.m; sourceTree = "<group>"; };
 		710CD30F22CD654D00CD7B0C /* FriendProfileViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FriendProfileViewController.h; sourceTree = "<group>"; };
 		710CD31022CD654D00CD7B0C /* FriendProfileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FriendProfileViewController.m; sourceTree = "<group>"; };
+		710CD31222CFD66F00CD7B0C /* InfiniteScrollActivityView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InfiniteScrollActivityView.h; sourceTree = "<group>"; };
+		710CD31322CFD66F00CD7B0C /* InfiniteScrollActivityView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InfiniteScrollActivityView.m; sourceTree = "<group>"; };
 		71A18E3F22CC2F1500C5E889 /* TweetDetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TweetDetailsViewController.h; sourceTree = "<group>"; };
 		71A18E4022CC2F1500C5E889 /* TweetDetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TweetDetailsViewController.m; sourceTree = "<group>"; };
 		71F863A422CA6BA800598A58 /* User.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
@@ -146,6 +149,8 @@
 		6AD278FF20BCBF280085BC29 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				710CD31222CFD66F00CD7B0C /* InfiniteScrollActivityView.h */,
+				710CD31322CFD66F00CD7B0C /* InfiniteScrollActivityView.m */,
 				71F863AA22CABDE500598A58 /* TweetCell.h */,
 				71F863AB22CABDE500598A58 /* TweetCell.m */,
 				710CD30C22CD2A7900CD7B0C /* ProfileCell.h */,
@@ -299,6 +304,7 @@
 				71F863B222CAE14F00598A58 /* ComposeViewController.m in Sources */,
 				6AD278E820BC4B970085BC29 /* main.m in Sources */,
 				71F863A922CA6F1A00598A58 /* Tweet.m in Sources */,
+				710CD31422CFD66F00CD7B0C /* InfiniteScrollActivityView.m in Sources */,
 				6AD2790620BCC0380085BC29 /* LoginViewController.m in Sources */,
 				6AD278DA20BC4B950085BC29 /* AppDelegate.m in Sources */,
 				710CD30E22CD2A7900CD7B0C /* ProfileCell.m in Sources */,
