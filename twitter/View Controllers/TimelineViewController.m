@@ -17,12 +17,13 @@
 #import "TweetDetailsViewController.h"
 #import "FriendProfileViewController.h"
 
-@interface TimelineViewController () <ComposeViewControllerDelegate, UITableViewDataSource, UITableViewDelegate>
+@interface TimelineViewController () <ComposeViewControllerDelegate, UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 
 @property (strong, nonatomic) NSMutableArray* arrayOfTweets;
 @property (weak, nonatomic) IBOutlet UITableView *TimelineTableView;
 @property (strong, nonatomic) UIRefreshControl * refreshControl;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *logoutButton;
+//@property (assign, nonatomic) BOOL isMoreDataLoading;
 
 @end
 
@@ -58,6 +59,24 @@
     return self.arrayOfTweets.count;
 }
 
+/*
+#pragma mark - scroll protocol
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    // Calculate the position of one screen length before the bottom of the results
+    int scrollViewContentHeight = self.TimelineTableView.contentSize.height;
+    int scrollOffsetThreshold = scrollViewContentHeight - self.TimelineTableView.bounds.size.height;
+    
+    // When the user has scrolled past the threshold, start requesting
+    if(scrollView.contentOffset.y > scrollOffsetThreshold && self.TimelineTableView.isDragging) {
+        self.isMoreDataLoading = true;
+        [self reloadEverything];
+        
+        // ... Code to load more results ...
+    }
+
+}
+*/
 
 #pragma mark - Helper Methods
 //This method is responsible for stablishing network connection and loading/reloading all our tweet data
@@ -73,18 +92,20 @@
                 NSLog(@"%@", text);
             }
             //Building out array of tweets
-            self.arrayOfTweets = tweets;
+            self.arrayOfTweets = (NSMutableArray*) tweets ;
+            
+            //self.isMoreDataLoading = NO;
             //In case the network connection fails
         } else {
             NSLog(@"😫😫😫 Error getting home timeline: %@", error.localizedDescription);
         }
         //End refreshing
         [self.refreshControl endRefreshing];
-        
         //Reload data once we stablish the connection
         [self.TimelineTableView reloadData];
     }];
 }
+
 
 -(void)setRefreshControl{
     self.refreshControl = [[UIRefreshControl alloc] init];
@@ -107,6 +128,7 @@
     [self.arrayOfTweets addObject:tweet];
     [self.TimelineTableView reloadData];
 }
+
 
 #pragma mark - Navigation
 //This method defines what to do when you click in the logout buttom. It leaves the view controller and goes back to the log in screen

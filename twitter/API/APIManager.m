@@ -12,8 +12,8 @@
 #import "User.h"
 
 static NSString * const baseURLString = @"https://api.twitter.com";
-static NSString * const consumerKey = @"5lUJuO5AUpPUCez4ewYDFrtgh";
-static NSString * const consumerSecret = @"s5ynGqXzstUZwFPxVyMDkYh197qvHOcVM3kwv1o2TKhS1avCdS";
+static NSString * const consumerKey = @"rbNIFbpNJJ14x4MZ9bEB8EpYr";
+static NSString * const consumerSecret = @"kyq66rE7zyg21ak0hSlrRVCOwC5tqND9u8H2DeCflYeMy9W6mX";
 
 @interface APIManager()
 
@@ -64,7 +64,7 @@ static NSString * const consumerSecret = @"s5ynGqXzstUZwFPxVyMDkYh197qvHOcVM3kwv
 }
 
 - (void)getUserWithCompletion:(void(^)(NSDictionary *userDictionary, NSError *error))completion {
-    [self GET:@"https://api.twitter.com/1.1/users/show.json?screen_name=Giovann45586421"
+    [self GET:@"https://api.twitter.com/1.1/account/verify_credentials.json"
    parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *  _Nullable rootDictionary) {
        // Manually cache the tweets. If the request fails, restore from cache if possible.
        NSDictionary *userDictionary = rootDictionary;
@@ -74,22 +74,6 @@ static NSString * const consumerSecret = @"s5ynGqXzstUZwFPxVyMDkYh197qvHOcVM3kwv
        completion(nil, error);
    }];
 }
-
-/*
-// ------ TODO: USER STUFF
-
-//Getting user credentials
-- (void)getUserCredentialsWithCompletion:(void(^)(User *obtainedUser, NSError *error))completion {
-    [self GET:@"https://api.twitter.com/1.1/account/verify_credentials.json"
-   parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSArray *  _Nullable userDictionaryFull) {
-       User *obtainedUser  = [User UserWithArray:userDictionaryFull];
-       completion(obtainedUser, nil);
-   } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-       // There was a problem
-       completion(nil, error);
-   }];
-}
-*/
 
 //Method to post the tweet
 - (void)postStatusWithText:(NSString *)text completion:(void (^)(Tweet *, NSError *))completion{

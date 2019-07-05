@@ -151,7 +151,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rpg-Ry-a3d" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-794" y="1155"/>
+            <point key="canvasLocation" x="-782" y="1943"/>
         </scene>
         <!--Home Timeline-->
         <scene sceneID="1Tv-nE-1AW">
@@ -494,7 +494,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1073" y="1952"/>
+            <point key="canvasLocation" x="164" y="1943"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="XHB-hU-hyg">
@@ -654,12 +654,23 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Character Count: 0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QDY-On-xaG">
+                                <rect key="frame" x="213" y="407.5" width="146" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="LCv-4i-5RL"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="QDY-On-xaG" firstAttribute="top" secondItem="Xuv-Ns-yXW" secondAttribute="bottom" constant="6" id="1Wj-70-Vmb"/>
                             <constraint firstItem="Xuv-Ns-yXW" firstAttribute="height" secondItem="ThY-Tb-ssa" secondAttribute="height" multiplier="1:2" constant="1" id="9g4-Zh-DNr"/>
                             <constraint firstItem="Xuv-Ns-yXW" firstAttribute="leading" secondItem="ThY-Tb-ssa" secondAttribute="leading" constant="57" id="OYz-5K-OFc"/>
                             <constraint firstItem="Xuv-Ns-yXW" firstAttribute="top" secondItem="ACp-IN-B2i" secondAttribute="top" constant="3" id="q0q-MD-S5s"/>
+                            <constraint firstItem="QDY-On-xaG" firstAttribute="trailing" secondItem="ThY-Tb-ssa" secondAttribute="trailingMargin" id="zDm-Ob-1fo"/>
                             <constraint firstItem="Xuv-Ns-yXW" firstAttribute="trailing" secondItem="ACp-IN-B2i" secondAttribute="trailing" constant="3" id="zkP-Lr-2H7"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ACp-IN-B2i"/>
@@ -678,6 +689,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="tweetText" destination="Xuv-Ns-yXW" id="wOO-rq-Pbm"/>
+                        <outlet property="wordCountLabel" destination="QDY-On-xaG" id="pT4-oc-CLc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FLA-we-0fj" userLabel="First Responder" sceneMemberID="firstResponder"/>

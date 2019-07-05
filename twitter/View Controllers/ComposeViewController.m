@@ -9,7 +9,8 @@
 #import "APIManager.h"
 #import "Tweet.h"
 
-@interface ComposeViewController ()
+@interface ComposeViewController ()<UITextViewDelegate>
+@property (weak, nonatomic) IBOutlet UILabel *wordCountLabel;
 @property (weak, nonatomic) IBOutlet UITextView *tweetText;
 @end
 
@@ -18,6 +19,8 @@
 #pragma mark - Flow of the app
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.tweetText.delegate = self;
     // Do any additional setup after loading the view.
 }
 
@@ -43,6 +46,23 @@
     [self dismissViewControllerAnimated:true completion:nil];
 }
 
+#pragma mark - Protocol method
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
+    int characterLimit = 140;
+    
+    NSString *newText = [self.tweetText.text stringByReplacingCharactersInRange:range withString:text];
+    self.wordCountLabel.text = [NSString stringWithFormat:@"Character count: %lu", (unsigned long)newText.length];
+    
+    BOOL isAllowed = newText.length < characterLimit;
+    
+    if(!isAllowed) {
+        self.wordCountLabel.textColor = [UIColor redColor];
+    }
+    
+    return isAllowed;
+
+}
 /*
  #pragma mark - Navigation
  
