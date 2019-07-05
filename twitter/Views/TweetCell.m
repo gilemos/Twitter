@@ -15,13 +15,13 @@
 
 @implementation TweetCell
 
-#pragma mark - Flow of the app
+#pragma mark - View lifecycle
 - (void)awakeFromNib {
     [super awakeFromNib];
     self.profileTapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(didTapPicture:)];
 }
 
-#pragma mark - Button functions
+#pragma mark - Button functions (like, retweet and reply)
 //Function for tapping the like buttom
 - (IBAction)didTapLike:(id)sender {
     //If it not favorited yet
@@ -86,7 +86,6 @@
             }
         }];
     }
-    
     [self refreshData];
 }
 
@@ -115,7 +114,7 @@
     //Putting action in picture
     [self.profileImage addGestureRecognizer:self.profileTapGestureRecognizer];
     [self.profileImage setUserInteractionEnabled:YES];
-
+    
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

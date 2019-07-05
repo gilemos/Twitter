@@ -13,7 +13,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface FriendProfileViewController : UIViewController
 @property(strong, nonatomic) User *user;
-
 @end
 
 NS_ASSUME_NONNULL_END

@@ -14,11 +14,11 @@
 
 @interface TweetDetailsViewController () <UITableViewDataSource, UITableViewDelegate, TweetCellDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *TweetDetailsTableView;
-
 @end
 
 @implementation TweetDetailsViewController
 
+#pragma mark - View lifecycle
 - (void)viewDidLoad {
     [super viewDidLoad];
     //Setting the delegate and the datasource
@@ -41,13 +41,7 @@
     return 1;
 }
 
-//- (IBAction)didTapPicture:(UITapGestureRecognizer *)sender {
-//    [self.delegate tweetCell:self didTap:self.tweet.user];
-//}
-
-
 #pragma mark - Navigation
-
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     Tweet *curTweet = self.tweet;
@@ -59,6 +53,5 @@
 - (void)tweetCell:(TweetCell *)tweetCell didTap:(User *)user{
     [self performSegueWithIdentifier:@"friendProfileSegue" sender:user];
 }
-
 
 @end

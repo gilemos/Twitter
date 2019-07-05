@@ -25,14 +25,14 @@
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *logoutButton;
 @property (assign, nonatomic) BOOL isMoreDataLoading;
-//@property (weak, nonatomic) InfiniteScrollActivityView* loadingMoreView;
 @end
 
 @implementation TimelineViewController
-//bool isMoreDataLoading = false;
-InfiniteScrollActivityView* loadingMoreView;
+{
+    InfiniteScrollActivityView* loadingMoreView;
+}
 
-#pragma mark - Flow of the app
+#pragma mark - View lifecycle
 //Method that is called as soon as the screen first lauches. It sets who is the delegate and the data source, sets the refresh control and calls the method to load all out tweet data.
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -40,16 +40,14 @@ InfiniteScrollActivityView* loadingMoreView;
     //Adding the refresh
     [self setRefreshControl];
     [self setInfiniteScroll];
-    
     //Setting the delegate and the datasource
     self.TimelineTableView.delegate = self;
     self.TimelineTableView.dataSource =self;
-    
     //Reloading all the data
     [self reloadEverything];
 }
 
-#pragma mark - table view protocols
+#pragma mark - Tableview Protocols
 //This method creates a cell at the index path
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     TweetCell *cell = (TweetCell *) [tableView dequeueReusableCellWithIdentifier:@"tweetCell" forIndexPath:indexPath];
@@ -64,9 +62,7 @@ InfiniteScrollActivityView* loadingMoreView;
     return self.arrayOfTweets.count;
 }
 
-
-#pragma mark - scroll protocol
-
+#pragma mark - Scroll Protocol
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     // Calculate the position of one screen length before the bottom of the results
     if(!self.isMoreDataLoading){
@@ -82,14 +78,40 @@ InfiniteScrollActivityView* loadingMoreView;
             CGRect frame = CGRectMake(0, self.TimelineTableView.contentSize.height, self.TimelineTableView.bounds.size.width, InfiniteScrollActivityView.defaultHeight);
             loadingMoreView.frame = frame;
             [loadingMoreView startAnimating];
-            
             //load more results
             [self loadMoreData];
         }
     }
 }
 
-#pragma mark - Helper Methods
+#pragma mak - Scroll Overall methods
+-(void)setInfiniteScroll {
+    CGRect frame = CGRectMake(0, self.TimelineTableView.contentSize.height, self.TimelineTableView.bounds.size.width, InfiniteScrollActivityView.defaultHeight);
+    loadingMoreView = [[InfiniteScrollActivityView alloc] initWithFrame:frame];
+    loadingMoreView.hidden = true;
+    [self.TimelineTableView addSubview:loadingMoreView];
+    
+    UIEdgeInsets insets = self.TimelineTableView.contentInset;
+    insets.bottom += InfiniteScrollActivityView.defaultHeight;
+    self.TimelineTableView.contentInset = insets;
+}
+
+-(NSNumber *)getNextTweetId {
+    Tweet * lastTweet = self.arrayOfTweets[self.arrayOfTweets.count - 1];
+    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+    NSNumber *idNumber = [formatter numberFromString:lastTweet.idString];
+    NSNumber *idLongLong= @(idNumber.longLongValue - 1);
+    return idLongLong;
+}
+
+#pragma mark - Tweet methods
+//Adds a new tweet to the array of tweets and reloads data
+-(void)didTweet:(Tweet *) tweet {
+    [self.arrayOfTweets addObject:tweet];
+    [self.TimelineTableView reloadData];
+}
+
+#pragma mark - Loading Methods
 //This method is responsible for stablishing network connection and loading/reloading all our tweet data
 -(void)reloadEverything {
     // Get timeline
@@ -139,17 +161,6 @@ InfiniteScrollActivityView* loadingMoreView;
     [self.TimelineTableView insertSubview:self.refreshControl atIndex:0]; //inserting the refresh at the top
 }
 
--(void)setInfiniteScroll {
-    CGRect frame = CGRectMake(0, self.TimelineTableView.contentSize.height, self.TimelineTableView.bounds.size.width, InfiniteScrollActivityView.defaultHeight);
-    loadingMoreView = [[InfiniteScrollActivityView alloc] initWithFrame:frame];
-    loadingMoreView.hidden = true;
-    [self.TimelineTableView addSubview:loadingMoreView];
-    
-    UIEdgeInsets insets = self.TimelineTableView.contentInset;
-    insets.bottom += InfiniteScrollActivityView.defaultHeight;
-    self.TimelineTableView.contentInset = insets;
-}
-
 //This is a method for the refresh control. It is only called by the rerfesh control and its only function is to call the method reload everything so we can reload our tweet data and get more tweets for the timeline
 - (void)beginRefresh:(UIRefreshControl *)refreshControl {
     [self reloadEverything];
@@ -158,20 +169,6 @@ InfiniteScrollActivityView* loadingMoreView;
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-//Adds a new tweet to the array of tweets and reloads data
--(void)didTweet:(Tweet *) tweet {
-    [self.arrayOfTweets addObject:tweet];
-    [self.TimelineTableView reloadData];
-}
-
--(NSNumber *)getNextTweetId {
-    Tweet * lastTweet = self.arrayOfTweets[self.arrayOfTweets.count - 1];
-    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
-    NSNumber *idNumber = [formatter numberFromString:lastTweet.idString];
-    NSNumber *idLongLong= @(idNumber.longLongValue - 1);
-    return idLongLong;
 }
 
 #pragma mark - Navigation
@@ -194,6 +191,10 @@ InfiniteScrollActivityView* loadingMoreView;
         //-----Going to tweetDetails
         [self TweetDetailsSegue:segue sender:sender];
     }
+    //else if([[segue identifier] isEqualToString:@"replySegue"]) {
+    // ----Going to reply
+    //   [self replySegue:segue sender:sender];
+    //}
 }
 
 #pragma mark - Helper methods for navigation
@@ -201,6 +202,7 @@ InfiniteScrollActivityView* loadingMoreView;
     UINavigationController *navigationController = [segue destinationViewController];
     ComposeViewController *composeController = (ComposeViewController*)navigationController.topViewController;
     composeController.delegate = self;
+    composeController.isReply = NO;
 }
 
 -(void)TweetDetailsSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -210,4 +212,15 @@ InfiniteScrollActivityView* loadingMoreView;
     [tweetdetailsViewController setTweet:curTweet];
 }
 
+/*
+ -(void)replySegue:(UIStoryboardSegue *)segue sender:(id)sender{
+ TweetCell *tappedCell = sender;
+ Tweet *curTweet = tappedCell.tweet;
+ UINavigationController *navigationController = [segue destinationViewController];
+ ComposeViewController *composeController = (ComposeViewController*)navigationController.topViewController;
+ composeController.delegate = self;
+ composeController.isReply = YES;
+ composeController.replyId = curTweet.idString;
+ }
+ */
 @end

@@ -24,9 +24,6 @@ NS_ASSUME_NONNULL_BEGIN
 //This method sets all our properties based on the dictionary that is returned from the API
 - (instancetype)initWithDictionary:(NSDictionary *) dictionary;
 
-//TO DO: USER STUFF
-//+ (User *)UserWithArray:(NSArray *)dictionaries;
-
 @end
 
 NS_ASSUME_NONNULL_END

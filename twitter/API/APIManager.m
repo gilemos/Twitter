@@ -82,11 +82,17 @@ static NSString * const consumerSecret = @"s5ynGqXzstUZwFPxVyMDkYh197qvHOcVM3kwv
     [self updateWithUrl:urlString withParameters:parameters completion:completion];
 }
 
+//Method to post the tweet
+- (void)replyStatusWithText:(NSString *)text replyId:(NSString *)idString completion:(void (^)(Tweet *, NSError *))completion{
+    NSString *urlString = @"1.1/statuses/update.json";
+    NSDictionary *parameters = @{@"status": text, @"in_reply_to_status_id":idString};
+    [self updateWithUrl:urlString withParameters:parameters completion:completion];
+}
+
 #pragma mark - Requests for users
 - (void)getUserWithCompletion:(void(^)(NSDictionary *userDictionary, NSError *error))completion {
-    [self GET:@"https://api.twitter.com/1.1/account/verify_credentials.json"
+    [self GET:@"https://api.twitter.com/1.1/users/show.json?screen_name=GiLemos3"
    parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *  _Nullable rootDictionary) {
-       // Manually cache the tweets. If the request fails, restore from cache if possible.
        NSDictionary *userDictionary = rootDictionary;
        completion(userDictionary, nil);
    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {

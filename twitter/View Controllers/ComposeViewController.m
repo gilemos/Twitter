@@ -25,19 +25,15 @@
 #pragma mark - Buttons Functions
 //This function posts a tweet
 - (IBAction)tweetButtom:(id)sender {
-    [[APIManager shared]postStatusWithText:self.tweetText.text
-                                completion:^(Tweet *tweet, NSError *error) {
-                                    if(error){
-                                        NSLog(@"Error composing Tweet: %@",error.localizedDescription);
-                                    }
-                                    else{
-                                        [self.delegate didTweet:tweet];
-                                        NSLog(@"Compose Tweet Success!");
-                                        //If sucessfull, dismiss composer view controller
-                                        [self dismissViewControllerAnimated:true completion:nil];
-                                    }
-                                }];
-    
+    [self postNonReply];
+    /*
+     if(self.isReply) {
+     [self postReply];
+     }
+     else {
+     [self postNonReply];
+     }
+     */
 }
 
 //This function closes the screen
@@ -59,7 +55,41 @@
     }
     return isAllowed;
 }
+
+#pragma mark - Helper methods
+-(void)postNonReply {
+    [[APIManager shared]postStatusWithText:self.tweetText.text
+                                completion:^(Tweet *tweet, NSError *error) {
+                                    if(error){
+                                        NSLog(@"Error composing Tweet: %@",error.localizedDescription);
+                                    }
+                                    else{
+                                        [self.delegate didTweet:tweet];
+                                        NSLog(@"Compose Tweet Success!");
+                                        //If sucessfull, dismiss composer view controller
+                                        [self dismissViewControllerAnimated:true completion:nil];
+                                    }
+                                }];
+}
+
 /*
+ -(void)postReply {
+ NSDictionary *idParameter = @{@"in_replyin_reply_to_status_id": self.replyId};
+ 
+ [[APIManager shared]postStatusWithText:self.tweetText.text
+ completion:^(Tweet *tweet, NSError *error) {
+ if(error){
+ NSLog(@"Error composing Tweet: %@",error.localizedDescription);
+ }
+ else{
+ [self.delegate didTweet:tweet];
+ NSLog(@"Compose Tweet Success!");
+ //If sucessfull, dismiss composer view controller
+ [self dismissViewControllerAnimated:true completion:nil];
+ }
+ }];
+ }
+ 
  #pragma mark - Navigation
  
  // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -67,6 +97,6 @@
  // Get the new view controller using [segue destinationViewController].
  // Pass the selected object to the new view controller.
  }
-
-*/
+ 
+ */
 @end

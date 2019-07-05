@@ -280,6 +280,9 @@
                                                         <constraint firstAttribute="height" constant="30" id="qo0-4K-TJd"/>
                                                     </constraints>
                                                     <state key="normal" title="Button" image="reply-icon"/>
+                                                    <connections>
+                                                        <segue destination="y4D-1w-iqc" kind="show" identifier="replySegue" id="MJv-D8-VGi"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -474,6 +477,9 @@
                                                     <rect key="frame" x="226" y="439" width="45" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <state key="normal" title="Button" image="reply-icon"/>
+                                                    <connections>
+                                                        <segue destination="y4D-1w-iqc" kind="show" identifier="replySegue" id="heM-db-GLR"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                         </tableViewCellContentView>
@@ -741,4 +747,7 @@
         <image name="retweet-icon" width="30" height="30"/>
         <image name="retweet-icon-green" width="30" height="30"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="MJv-D8-VGi"/>
+    </inferredMetricsTieBreakers>
 </document>

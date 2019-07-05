@@ -16,7 +16,6 @@
     self = [super init];
     if (self) {
         [self retweetCheckWithDictionary:dictionary];
-        
         self.idString = dictionary[@"id_str"];
         self.text = dictionary[@"text"];
         self.favoriteCount = [dictionary[@"favorite_count"] intValue];
@@ -70,7 +69,6 @@
     formatter.timeStyle = NSDateFormatterNoStyle;
     self.createdAtString = [formatter stringFromDate:date];
     self.tweetDate = date;
-    
 }
 
 

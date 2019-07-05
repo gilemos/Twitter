@@ -11,15 +11,15 @@
 
 @implementation ProfileCell
 
+#pragma mark - View Lifecycle
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
 }
 
+#pragma mark - Helper Methods
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
 }
 
 -(void)refreshData {
@@ -33,10 +33,8 @@
     //Getting the profile and cover image
     NSString *photoLinkString = self.user.photoLink;
     NSString *coverLinkString = self.user.coverLink;
-    
     NSURL *photoURL = [NSURL URLWithString:photoLinkString];
     NSURL *coverURL = [NSURL URLWithString:coverLinkString];
-    
     [self.profileImage setImageWithURL:photoURL];
     [self.coverImage setImageWithURL:coverURL];
 }
