@@ -20,9 +20,9 @@
 
 @interface TimelineViewController () <ComposeViewControllerDelegate, UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 
-@property (strong, nonatomic) NSMutableArray* arrayOfTweets;
+@property (strong, nonatomic) NSMutableArray *arrayOfTweets;
 @property (weak, nonatomic) IBOutlet UITableView *TimelineTableView;
-@property (strong, nonatomic) UIRefreshControl * refreshControl;
+@property (strong, nonatomic) UIRefreshControl *refreshControl;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *logoutButton;
 @property (assign, nonatomic) BOOL isMoreDataLoading;
 //@property (weak, nonatomic) InfiniteScrollActivityView* loadingMoreView;
@@ -69,22 +69,24 @@ InfiniteScrollActivityView* loadingMoreView;
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     // Calculate the position of one screen length before the bottom of the results
-    int scrollViewContentHeight = self.TimelineTableView.contentSize.height;
-    int scrollOffsetThreshold = scrollViewContentHeight - self.TimelineTableView.bounds.size.height;
-    
-    // When the user has scrolled past the threshold, start requesting
-    if(scrollView.contentOffset.y > scrollOffsetThreshold && self.TimelineTableView.isDragging) {
-        self.isMoreDataLoading = YES;
+    if(!self.isMoreDataLoading){
+        int scrollViewContentHeight = self.TimelineTableView.contentSize.height;
+        int scrollOffsetThreshold = scrollViewContentHeight
+        - self.TimelineTableView.bounds.size.height;
         
-        // Update position of loadingMoreView, and start loading indicator
-        CGRect frame = CGRectMake(0, self.TimelineTableView.contentSize.height, self.TimelineTableView.bounds.size.width, InfiniteScrollActivityView.defaultHeight);
-        loadingMoreView.frame = frame;
-        [loadingMoreView startAnimating];
-        
-        //load more results
-        [self loadMoreData];
+        // When the user has scrolled past the threshold, start requesting
+        if(scrollView.contentOffset.y > scrollOffsetThreshold && self.TimelineTableView.isDragging) {
+            self.isMoreDataLoading = YES;
+            
+            // Update position of loadingMoreView, and start loading indicator
+            CGRect frame = CGRectMake(0, self.TimelineTableView.contentSize.height, self.TimelineTableView.bounds.size.width, InfiniteScrollActivityView.defaultHeight);
+            loadingMoreView.frame = frame;
+            [loadingMoreView startAnimating];
+            
+            //load more results
+            [self loadMoreData];
+        }
     }
-
 }
 
 #pragma mark - Helper Methods
@@ -120,7 +122,8 @@ InfiniteScrollActivityView* loadingMoreView;
     [[APIManager shared] getMoreTweetsWithParameter:@{@"max_id":nextTweetId} withCompletion:^(NSArray *tweets, NSError *error) {
         if (tweets) {
             NSLog(@"😎😎😎 Successfully loaded more tweets");
-            self.arrayOfTweets = (NSMutableArray*) tweets;
+            [self.arrayOfTweets addObjectsFromArray:tweets];
+            //self.arrayOfTweets = (NSMutableArray*) tweets;
             self.isMoreDataLoading = NO;
             [loadingMoreView stopAnimating];
         } else {
@@ -185,11 +188,11 @@ InfiniteScrollActivityView* loadingMoreView;
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     //----- Going to the composer
     if([[segue identifier] isEqualToString:@"segueToCompose"]) {
-    [self ComposerSegue:segue];
+        [self ComposerSegue:segue];
     }
     else if([[segue  identifier] isEqualToString:@"segueToTweetDetails"]) {
-    //-----Going to tweetDetails
-    [self TweetDetailsSegue:segue sender:sender];
+        //-----Going to tweetDetails
+        [self TweetDetailsSegue:segue sender:sender];
     }
 }
 

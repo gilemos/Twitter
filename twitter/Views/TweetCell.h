@@ -24,6 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) Tweet *tweet;
 @property (weak, nonatomic) IBOutlet UIButton *isFavourited;
 @property (weak, nonatomic) IBOutlet UIButton *isRetweeted;
+@property (weak, nonatomic) IBOutlet UIButton *replyButton;
 @property (nonatomic, weak) id<TweetCellDelegate> delegate;
 @property (strong, nonatomic) UITapGestureRecognizer *profileTapGestureRecognizer;
 -(void) refreshData;

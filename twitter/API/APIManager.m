@@ -49,7 +49,7 @@ static NSString * const consumerSecret = @"s5ynGqXzstUZwFPxVyMDkYh197qvHOcVM3kwv
     return self;
 }
 
-#pragma mark - General Requests
+#pragma mark - Requests for tweets
 //Updating the timeline
 - (void)getHomeTimelineWithCompletion:(void(^)(NSArray *tweets, NSError *error))completion {
     [self GET:@"1.1/statuses/home_timeline.json"
@@ -75,6 +75,14 @@ static NSString * const consumerSecret = @"s5ynGqXzstUZwFPxVyMDkYh197qvHOcVM3kwv
    }];
 }
 
+//Method to post the tweet
+- (void)postStatusWithText:(NSString *)text completion:(void (^)(Tweet *, NSError *))completion{
+    NSString *urlString = @"1.1/statuses/update.json";
+    NSDictionary *parameters = @{@"status": text};
+    [self updateWithUrl:urlString withParameters:parameters completion:completion];
+}
+
+#pragma mark - Requests for users
 - (void)getUserWithCompletion:(void(^)(NSDictionary *userDictionary, NSError *error))completion {
     [self GET:@"https://api.twitter.com/1.1/account/verify_credentials.json"
    parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *  _Nullable rootDictionary) {
@@ -85,13 +93,6 @@ static NSString * const consumerSecret = @"s5ynGqXzstUZwFPxVyMDkYh197qvHOcVM3kwv
        // There was a problem
        completion(nil, error);
    }];
-}
-
-//Method to post the tweet
-- (void)postStatusWithText:(NSString *)text completion:(void (^)(Tweet *, NSError *))completion{
-    NSString *urlString = @"1.1/statuses/update.json";
-    NSDictionary *parameters = @{@"status": text};
-    [self updateWithUrl:urlString withParameters:parameters completion:completion];
 }
 
 #pragma mark - Updating tweet's buttons

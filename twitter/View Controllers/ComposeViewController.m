@@ -19,9 +19,7 @@
 #pragma mark - Flow of the app
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     self.tweetText.delegate = self;
-    // Do any additional setup after loading the view.
 }
 
 #pragma mark - Buttons Functions
@@ -41,27 +39,25 @@
                                 }];
     
 }
+
 //This function closes the screen
 - (IBAction)closeButtom:(id)sender {
     [self dismissViewControllerAnimated:true completion:nil];
 }
 
 #pragma mark - Protocol method
-
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
     int characterLimit = 140;
-    
+    //This is the text the user is typing
     NSString *newText = [self.tweetText.text stringByReplacingCharactersInRange:range withString:text];
     self.wordCountLabel.text = [NSString stringWithFormat:@"Character count: %lu", (unsigned long)newText.length];
-    
+    //Sees if the length is allowed
     BOOL isAllowed = newText.length < characterLimit;
-    
+    //If not, the label turns red
     if(!isAllowed) {
         self.wordCountLabel.textColor = [UIColor redColor];
     }
-    
     return isAllowed;
-
 }
 /*
  #pragma mark - Navigation

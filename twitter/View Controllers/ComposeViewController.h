@@ -19,7 +19,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface ComposeViewController : UIViewController
 
 @property (nonatomic, weak) id<ComposeViewControllerDelegate> delegate;
-
+@property (nonatomic) bool isReply;
+@property (strong, nonatomic) NSString *replyId;
 @end
 
 NS_ASSUME_NONNULL_END

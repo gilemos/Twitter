@@ -273,12 +273,21 @@
                                                     <color key="textColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v82-Jt-mtf">
+                                                    <rect key="frame" x="236" y="109.5" width="45" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="45" id="DTS-0W-Is6"/>
+                                                        <constraint firstAttribute="height" constant="30" id="qo0-4K-TJd"/>
+                                                    </constraints>
+                                                    <state key="normal" title="Button" image="reply-icon"/>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="K83-ju-Tje" firstAttribute="centerY" secondItem="tyz-XO-pIX" secondAttribute="centerY" id="0PW-TG-Mhb"/>
                                                 <constraint firstAttribute="bottom" secondItem="K83-ju-Tje" secondAttribute="bottom" constant="3" id="0js-C0-pUF"/>
                                                 <constraint firstItem="umv-ER-Qwt" firstAttribute="leading" secondItem="K83-ju-Tje" secondAttribute="trailing" constant="5" id="18z-9F-ESo"/>
                                                 <constraint firstItem="NQS-TB-8iK" firstAttribute="top" secondItem="Jwe-ZX-nTe" secondAttribute="top" constant="6" id="2Xn-Id-OWS"/>
+                                                <constraint firstItem="v82-Jt-mtf" firstAttribute="leading" secondItem="umv-ER-Qwt" secondAttribute="trailing" constant="30" id="9II-lU-2Wu"/>
                                                 <constraint firstItem="jd3-yw-WgT" firstAttribute="leading" secondItem="NQS-TB-8iK" secondAttribute="trailing" constant="8" id="AN9-C1-9BB"/>
                                                 <constraint firstItem="AKL-c4-Wo7" firstAttribute="leading" secondItem="Jwe-ZX-nTe" secondAttribute="leading" constant="6" id="F4h-UY-hrB"/>
                                                 <constraint firstAttribute="trailing" secondItem="NLp-9m-A2p" secondAttribute="trailing" constant="8" id="Jb3-FG-j3C"/>
@@ -291,6 +300,7 @@
                                                 <constraint firstItem="umv-ER-Qwt" firstAttribute="centerY" secondItem="tyz-XO-pIX" secondAttribute="centerY" id="Ww7-v8-psV"/>
                                                 <constraint firstItem="waM-66-9CV" firstAttribute="leading" secondItem="Jwe-ZX-nTe" secondAttribute="leadingMargin" constant="10" id="XKt-mB-LKk"/>
                                                 <constraint firstItem="omc-Xq-vxP" firstAttribute="top" secondItem="Jwe-ZX-nTe" secondAttribute="top" constant="10" id="Xpg-JB-bvt"/>
+                                                <constraint firstItem="v82-Jt-mtf" firstAttribute="centerY" secondItem="umv-ER-Qwt" secondAttribute="centerY" id="hcK-Qx-D86"/>
                                                 <constraint firstItem="iY0-k7-aJl" firstAttribute="centerY" secondItem="omc-Xq-vxP" secondAttribute="centerY" id="jR8-Hu-YrW"/>
                                                 <constraint firstItem="iY0-k7-aJl" firstAttribute="leading" secondItem="omc-Xq-vxP" secondAttribute="trailing" constant="8" id="lxz-ha-u5K"/>
                                                 <constraint firstItem="NLp-9m-A2p" firstAttribute="top" secondItem="NQS-TB-8iK" secondAttribute="bottom" constant="5" id="mrx-2U-RJT"/>
@@ -308,6 +318,7 @@
                                             <outlet property="loveNumberLabel" destination="umv-ER-Qwt" id="RC0-wZ-cPi"/>
                                             <outlet property="nameLabel" destination="jd3-yw-WgT" id="0c7-ro-4kn"/>
                                             <outlet property="profileImage" destination="AKL-c4-Wo7" id="zyc-LS-VUz"/>
+                                            <outlet property="replyButton" destination="v82-Jt-mtf" id="H81-mC-ysc"/>
                                             <outlet property="retweetNumberLabel" destination="tyz-XO-pIX" id="gUb-bv-Mob"/>
                                             <outlet property="screenNameLabel" destination="NQS-TB-8iK" id="IYh-E1-Fc5"/>
                                             <outlet property="timeAgoLabel" destination="iY0-k7-aJl" id="bcp-Hd-hkU"/>
@@ -348,7 +359,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oQh-hN-GQg" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="tld-Qp-jVX" userLabel="didTapPicture"/>
             </objects>
-            <point key="canvasLocation" x="164" y="1128"/>
+            <point key="canvasLocation" x="164" y="1127.5862068965519"/>
         </scene>
         <!--Tweet Details View Controller-->
         <scene sceneID="kLl-f7-gSg">
@@ -459,6 +470,11 @@
                                                     <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NAB-IH-0PK">
+                                                    <rect key="frame" x="226" y="439" width="45" height="30"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <state key="normal" title="Button" image="reply-icon"/>
+                                                </button>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <gestureRecognizers/>
@@ -721,6 +737,7 @@
         <image name="favor-icon-red" width="30" height="30"/>
         <image name="home-icon" width="30" height="30"/>
         <image name="moment-icon" width="30" height="30"/>
+        <image name="reply-icon" width="30" height="30"/>
         <image name="retweet-icon" width="30" height="30"/>
         <image name="retweet-icon-green" width="30" height="30"/>
     </resources>

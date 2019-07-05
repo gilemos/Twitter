@@ -56,7 +56,6 @@
         } else {
             NSLog(@"😫😫😫 Error getting home timeline: %@", error.localizedDescription);
         }
-        [self.profileTableView reloadData];
     }];
 }
 
