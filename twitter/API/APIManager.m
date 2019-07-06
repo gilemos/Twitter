@@ -91,7 +91,7 @@ static NSString * const consumerSecret = @"s5ynGqXzstUZwFPxVyMDkYh197qvHOcVM3kwv
 
 #pragma mark - Requests for users
 - (void)getUserWithCompletion:(void(^)(NSDictionary *userDictionary, NSError *error))completion {
-    [self GET:@"https://api.twitter.com/1.1/users/show.json?screen_name=GiLemos3"
+    [self GET:@"https://api.twitter.com/1.1/account/verify_credentials.json"
    parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *  _Nullable rootDictionary) {
        NSDictionary *userDictionary = rootDictionary;
        completion(userDictionary, nil);
