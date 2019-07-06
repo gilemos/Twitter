@@ -31,8 +31,8 @@ The following **optional** features are implemented:
 - [x] User can tap the profile image in any tweet to see another user's profile
 - Contains the user header view: picture and tagline
 - Contains a section with the users basic stats: # tweets, # following, # followers
-- [ ] User can load more tweets once they reach the bottom of the feed using infinite loading similar to the actual Twitter client.
-- [ ] When composing, you should have a countdown for the number of characters remaining for the tweet (out of 140) (**1 point**)
+- [X] User can load more tweets once they reach the bottom of the feed using infinite loading similar to the actual Twitter client.
+- [X] When composing, you should have a countdown for the number of characters remaining for the tweet (out of 140) (**1 point**)
 - [ ] After creating a new tweet, a user should be able to view it in the timeline immediately without refetching the timeline from the network.
 - [ ] User can reply to any tweet, and replies should be prefixed with the username and the reply_id should be set when posting the tweet (**2 points**)
 - [ ] User sees embedded images in tweet if available
@@ -53,13 +53,15 @@ Please list two areas of the assignment you'd like to **discuss further with you
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='http://g.recordit.co/ZVZPEv5bWh.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 ## Notes
 
 Describe any challenges encountered while building the app.
+ - I will still implement some funcions, such as the reply buttom (you can see some commented code, sorry for that, but I am still working on it)
+ - The personal profile worked in previous versions, but ended up generating an infinite loop. I corrected the infinite loop but the profile might not work. Still working on that
 
 ## Credits
 
